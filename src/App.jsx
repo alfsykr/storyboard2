@@ -22,6 +22,7 @@ import GamePilihPendapatAsli from './components/GamePilihPendapatAsli';
 import GameTanggaKeberanian from './components/GameTanggaKeberanian';
 import Penutup from './components/Penutup';
 import ProfilPengembang from './components/ProfilPengembang';
+import SapaanTujuan from './components/SapaanTujuan';
 
 // Story configurations
 const storyPagesData = [
@@ -84,7 +85,7 @@ const storyPagesData = [
 ];
 
 export default function App() {
-  const [pageIndex, setPageIndex] = useState(0); // 0 to 18
+  const [pageIndex, setPageIndex] = useState(0); // 0 to 19
 
   // Game states and scores
   const [totalScore, setTotalScore] = useState(0);
@@ -111,11 +112,11 @@ export default function App() {
 
   // Navigations
   const handleNext = () => {
-    if (pageIndex === 14) {
+    if (pageIndex === 15) {
       // Completed quiz
       triggerConfetti();
     }
-    if (pageIndex < 18) {
+    if (pageIndex < 19) {
       setPageIndex(prev => prev + 1);
     }
   };
@@ -162,8 +163,8 @@ export default function App() {
     setTotalScore(prev => prev + points);
   };
 
-  // Progress calculator (percentage of main flow: 15 pages)
-  const mainFlowPages = 15;
+  // Progress calculator (percentage of main flow: 16 pages)
+  const mainFlowPages = 16;
   const isMainFlow = pageIndex < mainFlowPages;
   const progressPercent = isMainFlow ? Math.round((pageIndex / (mainFlowPages - 1)) * 100) : 100;
 
@@ -246,7 +247,10 @@ export default function App() {
           </div>
         );
 
-      case 1: // Pemantik (Warm-Up Poll)
+      case 1: // Sapaan dan Tujuan Pembelajaran (NEW)
+        return <SapaanTujuan />;
+
+      case 2: // Pemantik (Warm-Up Poll)
         return (
           <div className="poll-screen" style={{ animation: 'fadeIn 0.4s ease-out' }}>
             <h2 className="text-center mb-3" style={{ fontSize: '1.4rem' }}>Yuk, Berikan Pendapatmu!</h2>
@@ -325,13 +329,13 @@ export default function App() {
           </div>
         );
 
-      case 2:
       case 3:
       case 4:
       case 5:
       case 6:
-      case 7: // Story pages 3-8 (indexes 2 to 7)
-        const storyData = storyPagesData[pageIndex - 2];
+      case 7:
+      case 8: // Story pages 3-8 (indexes 3 to 8)
+        const storyData = storyPagesData[pageIndex - 3];
         return (
           <StoryPage
             pageData={storyData}
@@ -340,7 +344,7 @@ export default function App() {
           />
         );
 
-      case 8: // Refleksi (Halaman 9)
+      case 9: // Refleksi (Halaman 9)
         return (
           <Refleksi
             answers={reflectionAnswers}
@@ -348,7 +352,7 @@ export default function App() {
           />
         );
 
-      case 9: // Materi Inti (Halaman 10)
+      case 10: // Materi Inti (Halaman 10)
         return (
           <MateriInti
             answer={materiReflection}
@@ -356,20 +360,20 @@ export default function App() {
           />
         );
 
-      case 10:
       case 11:
       case 12:
       case 13:
-      case 14: // Quiz pages 11-15 (indexes 10 to 14)
+      case 14:
+      case 15: // Quiz pages 11-15 (indexes 11 to 15)
         return (
           <KuisInteraktif
-            questionIndex={pageIndex - 10}
+            questionIndex={pageIndex - 11}
             answeredState={quizAnswers}
             onAnswerSelect={handleQuizAnswer}
           />
         );
 
-      case 15: // Game 1: Pasar Pendapat
+      case 16: // Game 1: Pasar Pendapat
         return (
           <GamePasarPendapat
             onScoreChange={addScore}
@@ -377,7 +381,7 @@ export default function App() {
           />
         );
 
-      case 16: // Game 2: Pilih Pendapat Asli
+      case 17: // Game 2: Pilih Pendapat Asli
         return (
           <GamePilihPendapatAsli
             onScoreChange={addScore}
@@ -385,14 +389,14 @@ export default function App() {
           />
         );
 
-      case 17: // Game 3: Tangga Keberanian
+      case 18: // Game 3: Tangga Keberanian
         return (
           <GameTanggaKeberanian
             onComplete={() => setGame3Done(true)}
           />
         );
 
-      case 18: // Penutup (Halaman 15/Penutup)
+      case 19: // Penutup (Halaman 15/Penutup)
         return (
           <Penutup
             challengeValue={challengeAnswer}
@@ -400,14 +404,14 @@ export default function App() {
             reflectionAnswers={reflectionAnswers}
             materiReflection={materiReflection}
             onRestart={handleRestart}
-            onShowDeveloper={() => setPageIndex(19)}
+            onShowDeveloper={() => setPageIndex(20)}
           />
         );
 
-      case 19: // Profil Pengembang
+      case 20: // Profil Pengembang
         return (
           <ProfilPengembang
-            onBack={() => setPageIndex(18)}
+            onBack={() => setPageIndex(19)}
             onMainMenu={handleRestart}
           />
         );
@@ -419,22 +423,22 @@ export default function App() {
 
   // Determine if Next button should be enabled
   const isNextDisabled = () => {
-    if (pageIndex === 1) {
+    if (pageIndex === 2) {
       return pollAnswer === null; // must poll first
     }
-    if (pageIndex >= 10 && pageIndex <= 14) {
-      return quizAnswers[pageIndex - 10] === undefined; // must answer quiz first
-    }
-    if (pageIndex === 15) {
-      return !game1Done; // must complete game 1
+    if (pageIndex >= 11 && pageIndex <= 15) {
+      return quizAnswers[pageIndex - 11] === undefined; // must answer quiz first
     }
     if (pageIndex === 16) {
-      return !game2Done; // must complete game 2
+      return !game1Done; // must complete game 1
     }
     if (pageIndex === 17) {
-      return !game3Done; // must complete game 3
+      return !game2Done; // must complete game 2
     }
     if (pageIndex === 18) {
+      return !game3Done; // must complete game 3
+    }
+    if (pageIndex === 19) {
       return true; // no next page from closing screen
     }
     return false;
@@ -458,7 +462,7 @@ export default function App() {
             <div className="progress-bar" style={{ width: `${progressPercent}%` }} />
           </div>
           <span style={{ minWidth: '40px', textAlign: 'right' }}>
-            {pageIndex === 19 ? "Profil" : isMainFlow ? `${pageIndex + 1}/${mainFlowPages}` : "Game Hub"}
+            {pageIndex === 20 ? "Profil" : isMainFlow ? `${pageIndex + 1}/${mainFlowPages}` : "Game Hub"}
           </span>
         </div>
       </header>
@@ -469,7 +473,7 @@ export default function App() {
       </main>
 
       {/* Footer Navigation Bar */}
-      {pageIndex > 0 && pageIndex !== 18 && pageIndex !== 19 && (
+      {pageIndex > 0 && pageIndex !== 19 && pageIndex !== 20 && (
         <footer className="app-footer">
           <button className="btn btn-secondary" onClick={handleBack} disabled={pageIndex === 0}>
             <ArrowLeft size={16} /> Sebelumnya

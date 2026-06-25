@@ -77,7 +77,11 @@ export default function GamePasarPendapat({ onScoreChange, onComplete }) {
         <Award size={48} color="#FF6F3C" style={{ margin: '0 auto 10px auto' }} />
         <h3>Game Selesai!</h3>
         <p style={{ margin: '10px 0' }}>Kamu berhasil mengumpulkan <strong>{gameScore} / 50</strong> poin dari Pasar Pendapat.</p>
-        <div style={{ color: '#A8D8A8', fontWeight: 'bold', fontSize: '1.2rem' }}>🎉 Bagus Sekali! 🎉</div>
+        {gameScore < 30 ? (
+          <div style={{ color: 'var(--color-accent)', fontWeight: 'bold', fontSize: '1.2rem' }}>💪 Ayo belajar lebih giat lagi! 💪</div>
+        ) : (
+          <div style={{ color: '#A8D8A8', fontWeight: 'bold', fontSize: '1.2rem' }}>🎉 Bagus Sekali! 🎉</div>
+        )}
       </div>
     );
   }
