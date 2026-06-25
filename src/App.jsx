@@ -21,6 +21,7 @@ import GamePasarPendapat from './components/GamePasarPendapat';
 import GamePilihPendapatAsli from './components/GamePilihPendapatAsli';
 import GameTanggaKeberanian from './components/GameTanggaKeberanian';
 import Penutup from './components/Penutup';
+import ProfilPengembang from './components/ProfilPengembang';
 
 // Story configurations
 const storyPagesData = [
@@ -84,7 +85,7 @@ const storyPagesData = [
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0); // 0 to 18
-  
+
   // Game states and scores
   const [totalScore, setTotalScore] = useState(0);
   const [pollAnswer, setPollAnswer] = useState(null);
@@ -171,25 +172,76 @@ export default function App() {
     switch (pageIndex) {
       case 0: // Cover
         return (
-          <div className="cover-screen">
-            <div className="text-center">
-              <span className="cover-meta">Pendidikan Kesetaraan Paket B</span>
-              <h1 className="cover-title">Suara Hati Rani</h1>
-              <p className="cover-subtitle">"Pendapatku berharga, pendapatmu juga berharga."</p>
-            </div>
-            
-            <div className="cover-illustration-container">
-              <img 
-                src={coverImg} 
-                alt="Rani membawa buku" 
-                className="cover-image"
-              />
+          <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            <div className="cover-screen">
+              <div className="text-center">
+                <span className="cover-meta">Pendidikan Kesetaraan Paket B</span>
+                <h1 className="cover-title">Suara Hati Rani</h1>
+                <p className="cover-subtitle">"Pendapatku berharga, pendapatmu juga berharga."</p>
+
+                {/* Mata Pelajaran & Unit Metadata Card */}
+                <div style={{ 
+                  marginTop: '15px', 
+                  marginBottom: '20px', 
+                  backgroundColor: '#FFF', 
+                  border: '2.5px solid #4A3728', 
+                  borderRadius: '12px', 
+                  padding: '12px 16px', 
+                  boxShadow: '3px 3px 0px #4A3728',
+                  textAlign: 'left',
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '6px'
+                }}>
+                  <div style={{ fontSize: '0.8rem', color: '#7A624E', textTransform: 'uppercase', fontWeight: 'bold', borderBottom: '1px dashed #4A3728', paddingBottom: '4px' }}>
+                    📚 Modul Pembelajaran
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.85rem', color: '#4A3728' }}>
+                    <div><strong>Mata Pelajaran:</strong> Pemberdayaan (Paket B)</div>
+                    <div><strong>Unit:</strong> Elemen Kesadaran Diri</div>
+                    <div><strong>Sub Unit:</strong> Pendapat Diri</div>
+                  </div>
+                </div>
+
+                <div style={{ width: '100%', marginTop: '15px' }}>
+                  <button className="btn btn-primary" onClick={handleNext} style={{ width: '100%' }}>
+                    ▶ Mulai Belajar
+                  </button>
+                </div>
+              </div>
+
+              <div className="cover-image-column">
+                <div className="cover-illustration-container">
+                  <img
+                    src={coverImg}
+                    alt="Rani membawa buku"
+                    className="cover-image"
+                  />
+                </div>
+                <div style={{
+                  fontSize: '0.72rem',
+                  color: '#7A624E',
+                  fontStyle: 'italic',
+                  textAlign: 'center',
+                  marginTop: '4px'
+                }}>
+                  🤖 *Setiap gambar dan ilustrasi dalam aplikasi ini dibuat menggunakan teknologi Kecerdasan Buatan (Generative AI).
+                </div>
+              </div>
             </div>
 
-            <div style={{ width: '100%', marginTop: '15px' }}>
-              <button className="btn btn-primary" onClick={handleNext} style={{ width: '100%' }}>
-                ▶ Mulai Belajar
-              </button>
+            <div style={{
+              marginTop: '40px',
+              fontSize: '0.75rem',
+              color: '#7A624E',
+              fontStyle: 'italic',
+              textAlign: 'center',
+              width: '100%',
+              borderTop: '1px dashed #4A3728',
+              paddingTop: '12px'
+            }}>
+
             </div>
           </div>
         );
@@ -198,8 +250,20 @@ export default function App() {
         return (
           <div className="poll-screen" style={{ animation: 'fadeIn 0.4s ease-out' }}>
             <h2 className="text-center mb-3" style={{ fontSize: '1.4rem' }}>Yuk, Berikan Pendapatmu!</h2>
-            <div className="cover-illustration-container mb-3" style={{ height: '180px' }}>
-              <img src={pemantikImg} alt="Remaja dengan gawai" className="cover-image" />
+            <div className="poll-image-column" style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
+              <div className="cover-illustration-container mb-3" style={{ height: '180px', width: '100%', maxWidth: '100%' }}>
+                <img src={pemantikImg} alt="Remaja dengan gawai" className="cover-image" />
+              </div>
+              <div style={{
+                fontSize: '0.72rem',
+                color: '#7A624E',
+                fontStyle: 'italic',
+                textAlign: 'center',
+                marginTop: '-4px',
+                marginBottom: '10px'
+              }}>
+
+              </div>
             </div>
 
             <p style={{ fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '15px', color: '#4A3728' }}>
@@ -223,7 +287,7 @@ export default function App() {
             {pollAnswer && (
               <div className="chart-container" style={{ animation: 'slideUp 0.3s ease-out' }}>
                 <p style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#4A3728' }}>Hasil Polling Siswa Paket B:</p>
-                
+
                 <div className="chart-bar-row">
                   <div className="chart-bar-labels">
                     <span>Membantu Belajar</span>
@@ -336,6 +400,15 @@ export default function App() {
             reflectionAnswers={reflectionAnswers}
             materiReflection={materiReflection}
             onRestart={handleRestart}
+            onShowDeveloper={() => setPageIndex(19)}
+          />
+        );
+
+      case 19: // Profil Pengembang
+        return (
+          <ProfilPengembang
+            onBack={() => setPageIndex(18)}
+            onMainMenu={handleRestart}
           />
         );
 
@@ -378,14 +451,14 @@ export default function App() {
             <span>Skor: {totalScore}</span>
           </div>
         </div>
-        
+
         {/* Progress Bar */}
         <div className="progress-container">
           <div className="progress-track">
             <div className="progress-bar" style={{ width: `${progressPercent}%` }} />
           </div>
           <span style={{ minWidth: '40px', textAlign: 'right' }}>
-            {isMainFlow ? `${pageIndex + 1}/${mainFlowPages}` : "Game Hub"}
+            {pageIndex === 19 ? "Profil" : isMainFlow ? `${pageIndex + 1}/${mainFlowPages}` : "Game Hub"}
           </span>
         </div>
       </header>
@@ -396,14 +469,14 @@ export default function App() {
       </main>
 
       {/* Footer Navigation Bar */}
-      {pageIndex > 0 && pageIndex !== 18 && (
+      {pageIndex > 0 && pageIndex !== 18 && pageIndex !== 19 && (
         <footer className="app-footer">
           <button className="btn btn-secondary" onClick={handleBack} disabled={pageIndex === 0}>
             <ArrowLeft size={16} /> Sebelumnya
           </button>
-          
-          <button 
-            className="btn btn-primary" 
+
+          <button
+            className="btn btn-primary"
             onClick={handleNext}
             disabled={isNextDisabled()}
           >

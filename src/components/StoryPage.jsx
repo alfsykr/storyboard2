@@ -7,27 +7,40 @@ export default function StoryPage({ pageData, reflectionValue, onReflectionChang
   return (
     <div className="comic-panel-container">
       <h2 className="text-center mb-3" style={{ fontSize: '1.4rem' }}>{title}</h2>
-      
-      {/* Comic Panel Image */}
-      <div className="comic-panel-frame">
-        <img 
-          src={image} 
-          alt={title} 
-          className="comic-panel-image"
-        />
-        {id === 5 && (
-          <div className="lightbulb-icon-float">
-            <Lightbulb size={24} color="#FFB300" fill="#FFC107" />
-          </div>
-        )}
+
+      {/* Comic Panel Image Column */}
+      <div className="comic-image-column-wrapper" style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
+        <div className="comic-panel-frame">
+          <img
+            src={image}
+            alt={title}
+            className="comic-panel-image"
+          />
+          {id === 5 && (
+            <div className="lightbulb-icon-float">
+              <Lightbulb size={24} color="#FFB300" fill="#FFC107" />
+            </div>
+          )}
+        </div>
+        <div style={{
+          fontSize: '0.72rem',
+          color: '#7A624E',
+          fontStyle: 'italic',
+          textAlign: 'center',
+          marginTop: '6px',
+          marginBottom: '10px',
+          width: '100%'
+        }}>
+          🤖 *Setiap gambar dan ilustrasi dalam aplikasi ini dibuat menggunakan teknologi Kecerdasan Buatan (Generative AI).
+        </div>
       </div>
 
       {/* Dialog Speech Bubbles */}
       {dialogues && dialogues.length > 0 && (
         <div className="dialog-container">
           {dialogues.map((dialog, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`speech-bubble speech-bubble-${dialog.align}`}
               style={{
                 alignSelf: dialog.align === 'left' ? 'flex-start' : 'flex-end',
