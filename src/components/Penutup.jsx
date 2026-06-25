@@ -1,6 +1,6 @@
 import React from 'react';
 import { Award, RefreshCw, Send, User } from 'lucide-react';
-import penutupImg from '../assets/penutup.png';
+import penutupImg from '../assets/penutup.webp';
 
 export default function Penutup({ challengeValue, onChallengeChange, reflectionAnswers = {}, materiReflection = '', onRestart, onShowDeveloper }) {
   return (

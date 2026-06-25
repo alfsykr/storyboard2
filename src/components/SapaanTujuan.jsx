@@ -1,6 +1,6 @@
 import React from 'react';
 import { Target, MessageSquare } from 'lucide-react';
-import tutorImg from '../assets/tutor.jpg';
+import tutorImg from '../assets/tutor.webp';
 
 export default function SapaanTujuan() {
   const objectives = [

@@ -3,14 +3,14 @@ import { ArrowLeft, ArrowRight, Award, HelpCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 // Assets
-import coverImg from './assets/cover.png';
-import pemantikImg from './assets/pemantik.png';
-import story1Img from './assets/story1.png';
-import story2Img from './assets/story2.png';
-import story3Img from './assets/story3.png';
-import story4Img from './assets/story4.png';
-import story5Img from './assets/story5.png';
-import story6Img from './assets/story6.png';
+import coverImg from './assets/cover.webp';
+import pemantikImg from './assets/pemantik.webp';
+import story1Img from './assets/story1.webp';
+import story2Img from './assets/story2.webp';
+import story3Img from './assets/story3.webp';
+import story4Img from './assets/story4.webp';
+import story5Img from './assets/story5.webp';
+import story6Img from './assets/story6.webp';
 
 // Components
 import StoryPage from './components/StoryPage';

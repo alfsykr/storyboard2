@@ -1,6 +1,6 @@
 import React from 'react';
 import { Home, ArrowLeft, Mail, Briefcase, User } from 'lucide-react';
-import profilImg from '../assets/Profil.png';
+import profilImg from '../assets/Profil.webp';
 
 export default function ProfilPengembang({ onBack, onMainMenu }) {
   return (
